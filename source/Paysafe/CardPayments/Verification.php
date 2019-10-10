@@ -81,7 +81,8 @@ class Verification extends \Paysafe\JSONObject implements \Paysafe\Pageable
          'riskReasonCode' => 'array:int',
          'acquirerResponse' => '\Paysafe\CardPayments\AcquirerResponse',
          'error' => '\Paysafe\Error',
-         'links' => 'array:\Paysafe\Link'
+         'links' => 'array:\Paysafe\Link',
+         'storedCredential' => '\Paysafe\CardPayments\StoredCredential',
     );
 
 }

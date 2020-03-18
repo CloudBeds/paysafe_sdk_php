@@ -459,4 +459,28 @@ class MerchantAccountService
 
         return new Merchant($response);
     }
+
+    /**
+     * Lookup merchant account users
+     *
+     * @return array
+     * @throws PaysafeException
+     */
+    public function lookupUsers()
+    {
+        $request = new Request(array(
+            'method' => Request::GET,
+            'uri' => $this->prepareURI('/accounts/' . $this->client->getAccount() . '/users')
+        ));
+        $response = $this->client->processRequest($request);
+        if (empty($response['users'])) {
+            return [];
+        }
+
+        $returnData = [];
+        foreach ($response['users'] as $user) {
+            $returnData[] = new User($user);
+        }
+        return $returnData;
+    }
 }

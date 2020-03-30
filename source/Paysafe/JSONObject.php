@@ -21,7 +21,9 @@
 
 namespace Paysafe;
 
-class JSONObject {
+use JsonSerializable;
+
+class JSONObject implements JsonSerializable{
 
     protected static $fieldTypes = array();
     private $properties = array();
@@ -37,7 +39,7 @@ class JSONObject {
         if (!is_array($fields)) {
             throw new PaysafeException('Invalid optional fields. Array expected.');
         }
-        if (($diff = array_diff($fields, array_keys(static::$fieldTypes)))) {
+        if ($diff = array_diff($fields, array_keys(static::$fieldTypes))) {
             throw new PaysafeException('Invalid optional fields. Unknown fields: ' . join(', ', $diff));
         }
 
@@ -202,7 +204,8 @@ class JSONObject {
 
     /**
      *
-     * @return json encoded copy of this object
+     * @return string|false encoded copy of this object
+     * @throws PaysafeException
      */
     public function toJson() {
         return json_encode($this->jsonSerialize());
@@ -225,7 +228,7 @@ class JSONObject {
     }
 
     public function checkRequiredFields() {
-        if (($diff = array_diff($this->requiredFields, array_keys($this->properties)))) {
+        if ($diff = array_diff($this->requiredFields, array_keys($this->properties))) {
             throw new PaysafeException('Missing required properties: ' . join(', ', $diff), 500);
         }
     }

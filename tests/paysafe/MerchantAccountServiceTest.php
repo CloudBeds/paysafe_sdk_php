@@ -101,7 +101,7 @@ class MerchantAccountServiceTest extends \PHPUnit_Framework_TestCase
 
         $this->expectException(PaysafeException::class);
         $this->expectExceptionCode(500);
-        $this->expectExceptionMessage('Missing required properties: name, currency, region, legalEntity, productCode, category, phone, yearlyVolumeRange, averageTransactionAmount, merchantDescriptor, caAccountDetails');
+        $this->expectExceptionMessage('Missing required properties: name, currency, region, legalEntity, productCode, category, phone, yearlyVolumeRange, averageTransactionAmount, merchantDescriptor');
 
         $mas->createMerchantAccount(new MerchantAccount());
     }

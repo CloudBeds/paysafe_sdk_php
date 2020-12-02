@@ -31,7 +31,7 @@ if (!function_exists('curl_version')) {
     throw new Exception('CURL is required for the Paysafe SDK.');
 }
 
-function __PaysafeAutoloader($className)
+function paysafeAutoloader($className)
 {
     $classPath = str_replace("\\", DIRECTORY_SEPARATOR, $className);
     if (($classFile = realpath(__DIR__ . DIRECTORY_SEPARATOR . $classPath . '.php'))) {
@@ -39,4 +39,4 @@ function __PaysafeAutoloader($className)
     }
 }
 
-spl_autoload_register('__PaysafeAutoloader');
+spl_autoload_register('paysafeAutoloader');
